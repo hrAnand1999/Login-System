@@ -1,0 +1,16 @@
+.intro {
+    text-align: center;
+}
+
+.box {
+    border: 5px solid red;
+    height: 100px;
+    width: 400px;
+    justify-content: center;
+    display: flex;
+    margin: auto;
+    margin-top: 500px;
+    background-color: aqua;
+    border-radius: 5%;
+    transform: translate(0, -50%);
+}

@@ -1,0 +1,29 @@
+{
+  "name": "login-system",
+  "version": "1.0.0",
+  "description": "User Login System",
+  "main": "app.js",
+  "scripts": {
+    "dev": "nodemon app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hrAnand1999/Login-System.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hrAnand1999/Login-System/issues"
+  },
+  "homepage": "https://github.com/hrAnand1999/Login-System#readme",
+  "dependencies": {
+    "cookie-parser": "^1.4.6",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "ejs": "^3.1.8",
+    "express": "^4.18.2",
+    "nodemon": "^2.0.21"
+  }
+}
