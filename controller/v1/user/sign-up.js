@@ -1,8 +1,9 @@
 const errorCodes = require('../../../error-codes');
 const { signUpSourceEnumOptions } = require('../../../enum');
+const { getHashedPassword } = require('../../../helpers/encrypt-password');
 
 
-const createUser = (req, res) => {
+const createUser = async (req, res) => {
 
     const requestPayload = {
         name : req.body.name,
@@ -13,11 +14,17 @@ const createUser = (req, res) => {
     }
 
     if(!requestPayload.name || !requestPayload.emailId || !requestPayload.password || !requestPayload.confirmPassword) {
-        return res.status(404).json({
+        return res.status(400).json({
             code : 'INVALID_REQUEST_400',
             message : errorCodes.INVALID_REQUEST_400
         })
+    } else if(requestPayload.password !== requestPayload.confirmPassword) {
+        return res.status(400).json({
+            code : 'PASSWORD_NOT_MATCHING_401',
+            message : errorCodes.PASSWORD_NOT_MATCHING_401
+        })
     }
+    const hashedPassword = await getHashedPassword(requestPayload.password)
 }
 
 module.exports = {
