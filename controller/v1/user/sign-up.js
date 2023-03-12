@@ -1,6 +1,7 @@
 const errorCodes = require('../../../error-codes');
 const { signUpSourceEnumOptions } = require('../../../enum');
-const { getHashedPassword } = require('../../../helpers/encrypt-password');
+const { getEncryptedPassword } = require('../../../helpers/encrypt-password');
+const { sendMail } = require('../../../helpers/mail-sender');
 
 
 const createUser = async (req, res) => {
@@ -24,7 +25,13 @@ const createUser = async (req, res) => {
             message : errorCodes.PASSWORD_NOT_MATCHING_401
         })
     }
-    const hashedPassword = await getHashedPassword(requestPayload.password)
+    const hashedPassword = await getEncryptedPassword(requestPayload.password);
+    
+    await sendMail(requestPayload.emailId);
+    return res.status(200).json({
+        password : hashedPassword,
+        message : 'ok'
+    })
 }
 
 module.exports = {
