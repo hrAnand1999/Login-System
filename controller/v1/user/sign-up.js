@@ -1,7 +1,8 @@
 const errorCodes = require('../../../error-codes');
-const { signUpSourceEnumOptions } = require('../../../enum');
+const { signUpSourceEnumOptions, SIGN_UP_MAIL_SUBJECT } = require('../../../enum');
 const { getEncryptedPassword } = require('../../../helpers/encrypt-password');
 const { sendMail } = require('../../../helpers/mail-sender');
+const ejs = require('ejs');
 
 
 const createUser = async (req, res) => {
@@ -26,8 +27,9 @@ const createUser = async (req, res) => {
         })
     }
     const hashedPassword = await getEncryptedPassword(requestPayload.password);
-    
-    await sendMail(requestPayload.emailId);
+    const data = await ejs.renderFile('views/sign-up.ejs', {name : requestPayload.name})
+    await sendMail(requestPayload.emailId, SIGN_UP_MAIL_SUBJECT, data);
+
     return res.status(200).json({
         password : hashedPassword,
         message : 'ok'

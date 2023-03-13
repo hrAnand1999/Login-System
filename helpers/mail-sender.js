@@ -1,13 +1,12 @@
 const { createTransporter } = require("./mail-transporter")
 
-const sendMail = async (recipient) => {
+const sendMail = async (recipient, subject="default", data) => {
     
-
     const mailOptions = {
         from : process.env.SENDER_MAIL,
         to : recipient,
-        subject : "haha",
-        text : "hakka"
+        subject : subject,
+        html : data
     }
 
     try {
