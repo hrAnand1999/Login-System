@@ -8,4 +8,6 @@ router.post('/log-in', routes.logIn.authenticateUser);
 
 router.post('/forgot-password', routes.forgotPassword.recoverPassword);
 
+router.get('/verify', routes.markActive.setActive)
+
 module.exports = router;
